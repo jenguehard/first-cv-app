@@ -76,8 +76,10 @@ st.title("Use Yolov4 to detect object on an image")
 
 st.write("Yolov4 is trained on COCO dataset and is able to detect 80 classes of elements (animals, objects...). Play with the confidence of the algorithm to check if you get the same predictions !")
 st.write("")
+st.write("If you choose a high value, you will get less predictions but more accurate. On the other hand, if you choose a low value, you will get more predictions that could be less accurate.")
+st.write("")
 
-conf_threshold = st.slider('Choose the confidence of the algorithm. If you choose a high value, you will get less predictions but more accurate. On the other hand, if you choose a low value, you will get more predictions that could be less accurate.', 0.1, 1.0, 0.1)
+conf_threshold = st.slider('Choose the confidence of the algorithm.', 0.1, 1.0, 0.1)
 
 st.header('Choose your image')
 
