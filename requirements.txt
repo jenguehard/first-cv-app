@@ -63,11 +63,11 @@ pyparsing==2.4.7
 pyrsistent==0.18.0
 python-dateutil==2.8.2
 python-utils==2.5.6
-pytz==2021.3
-pytz-deprecation-shim==0.1.0.post0
+pytz
+pytz-deprecation-shim
 pywin32
-pywinpty==1.1.5
-pyzmq==22.3.0
+pywinpty
+pyzmq
 requests==2.26.0
 Send2Trash==1.8.0
 six==1.16.0
