@@ -4,10 +4,6 @@ import numpy as np
 import time
 import os
 
-st.title("Use Yolov4 to detect object on an image")
-
-st.header('Choose your image')
-
 labelsPath = "classes.names"
 LABELS = open(labelsPath).read().strip().split("\n")
 colors = np.random.randint(0, 255, size=(len(LABELS), 3), dtype="uint8")
@@ -19,7 +15,7 @@ net = cv2.dnn.readNetFromDarknet(configPath, weightsPath)
 
 ##### FUNCTION #####
 
-def get_classification(img, net, LABELS) :
+def get_classification(img, net, LABELS, conf_threshold) :
     start = time.time()
     image = img
     (H, W) = image.shape[:2]
@@ -48,7 +44,7 @@ def get_classification(img, net, LABELS) :
             scores = detection[5:]
             classID = np.argmax(scores)
             confidence = scores[classID]
-            if confidence > 0.5 :
+            if confidence > conf_threshold :
                 box = detection[0:4] * np.array([W, H, W, H])
                 (centerX, centerY, width, height) = box.astype("int")
                 x = int(centerX - (width / 2))
@@ -56,7 +52,7 @@ def get_classification(img, net, LABELS) :
                 boxes.append([x, y, int(width), int(height)])
                 confidences.append(float(confidence))
                 classIDs.append(classID)
-    idxs = cv2.dnn.NMSBoxes(boxes, confidences,0.5,
+    idxs = cv2.dnn.NMSBoxes(boxes, confidences, conf_threshold,
 	0.3)
     if len(idxs) > 0:
         for i in idxs.flatten():
@@ -76,8 +72,14 @@ def get_classification(img, net, LABELS) :
     return image
 
 #####
+st.title("Use Yolov4 to detect object on an image")
 
+st.write("Yolov4 is trained on COCO dataset and is able to detect 80 classes of elements (animals, objects...). Play with the confidence of the algorithm to check if you get the same predictions !")
+st.write("")
 
+conf_threshold = st.slider('Choose the confidence of the algorithm. If you choose a high value, you will get less predictions but more accurate. On the other hand, if you choose a low value, you will get more predictions that could be less accurate.', 0.1, 1.0, 0.1)
+
+st.header('Choose your image')
 
 
 uploaded_file = st.file_uploader("Choose an image...", type=['png','jpeg','jpg'])
@@ -89,7 +91,7 @@ if uploaded_file is None:
     st.image(img, channels="BGR", use_column_width=True)
 
     if st.button("Predict !"):
-        predicted_image = get_classification(img, net, LABELS)
+        predicted_image = get_classification(img, net, LABELS, conf_threshold)
         st.image(predicted_image, channels="BGR", use_column_width=True)
 
 else:
@@ -103,5 +105,5 @@ else:
     # cv2.imwrite(filename, opencv_image)
 
     if st.button("Predict !"):
-        predicted_image = get_classification(opencv_image, net, LABELS)
+        predicted_image = get_classification(opencv_image, net, LABELS, conf_threshold)
         st.image(predicted_image, channels="BGR", use_column_width=True)
