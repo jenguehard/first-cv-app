@@ -79,7 +79,7 @@ st.write("")
 st.write("If you choose a high value, you will get less predictions but more accurate. On the other hand, if you choose a low value, you will get more predictions that could be less accurate.")
 st.write("")
 
-conf_threshold = st.slider('Choose the confidence of the algorithm.', 0.1, 1.0, 0.1)
+conf_threshold = st.slider('Choose the confidence of the algorithm.', 0.1, 1.0, 0.5, 0.05)
 
 st.header('Choose your image')
 
