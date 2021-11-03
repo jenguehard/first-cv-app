@@ -65,7 +65,7 @@ python-dateutil==2.8.2
 python-utils==2.5.6
 pytz
 pytz-deprecation-shim
-pywin32
+pypiwin32
 pywinpty
 pyzmq
 requests==2.26.0
