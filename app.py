@@ -86,9 +86,11 @@ st.header('Choose your image')
 
 uploaded_file = st.file_uploader("Choose an image...", type=['png','jpeg','jpg'])
 
+pictures_list = [i.split(".jpg")[0] for i in os.listdir("Pictures")]
+
 if uploaded_file is None:
-    option = st.selectbox('...or choose one of mine !', os.listdir("Pictures"))
-    img_path = os.path.join("Pictures", option)
+    option = st.selectbox('...or choose one of mine !', pictures_list)
+    img_path = os.path.join("Pictures", option + ".jpg")
     img = cv2.imread(img_path)
     st.image(img, channels="BGR", use_column_width=True)
 
