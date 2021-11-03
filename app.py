@@ -57,7 +57,7 @@ def get_classification(img, net, LABELS) :
             cv2.rectangle(image, (x, y), (x + w, y + h), color, 2)
             text = "{}: {:.4f}".format(LABELS[classIDs[i]], confidences[i])
             cv2.putText(
-                image, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2
+                image, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 2, color, 2
             )
             label = "Inference Time: {:.2f} s".format(end - start)
             # cv2.putText(
