@@ -2,6 +2,7 @@ import streamlit as st
 import cv2
 import numpy as np
 import time
+import os
 
 st.title("Use Yolov4 to detect object on an image")
 
@@ -22,6 +23,15 @@ def get_classification(img, net, LABELS) :
     start = time.time()
     image = img
     (H, W) = image.shape[:2]
+    if W < 1000:
+        font_size = 1
+        thickness = 1
+    elif W > 1000 and W < 2000:
+        font_size = 2
+        thickness = 2
+    else :
+        font_size = 5
+        thickness = 5 
     ln = net.getLayerNames()
     ln = [ln[i[0] - 1] for i in net.getUnconnectedOutLayers()]
     blob = cv2.dnn.blobFromImage(image, 1 / 255.0, (416, 416),
@@ -54,10 +64,10 @@ def get_classification(img, net, LABELS) :
             (w, h) = (boxes[i][2], boxes[i][3])
 
             color = [int(c) for c in colors[classIDs[i]]]
-            cv2.rectangle(image, (x, y), (x + w, y + h), color, 5)
+            cv2.rectangle(image, (x, y), (x + w, y + h), color, thickness)
             text = "{}: {:.4f}".format(LABELS[classIDs[i]], confidences[i])
             cv2.putText(
-                image, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 5, color, 2
+                image, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, font_size, color, 2
             )
             label = "Inference Time: {:.2f} s".format(end - start)
             # cv2.putText(
@@ -72,7 +82,17 @@ def get_classification(img, net, LABELS) :
 
 uploaded_file = st.file_uploader("Choose an image...", type=['png','jpeg','jpg'])
 
-if uploaded_file is not None:
+if uploaded_file is None:
+    option = st.selectbox('...or choose one of mine !', os.listdir("Pictures"))
+    img_path = os.path.join("Pictures", option)
+    img = cv2.imread(img_path)
+    st.image(img, channels="BGR", use_column_width=True)
+
+    if st.button("Predict !"):
+        predicted_image = get_classification(img, net, LABELS)
+        st.image(predicted_image, channels="BGR", use_column_width=True)
+
+else:
     # Convert the file to an opencv image.
     filename = uploaded_file.name
     file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
