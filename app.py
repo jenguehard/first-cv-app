@@ -54,10 +54,10 @@ def get_classification(img, net, LABELS) :
             (w, h) = (boxes[i][2], boxes[i][3])
 
             color = [int(c) for c in colors[classIDs[i]]]
-            cv2.rectangle(image, (x, y), (x + w, y + h), color, 2)
+            cv2.rectangle(image, (x, y), (x + w, y + h), color, 5)
             text = "{}: {:.4f}".format(LABELS[classIDs[i]], confidences[i])
             cv2.putText(
-                image, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 2, color, 2
+                image, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 5, color, 2
             )
             label = "Inference Time: {:.2f} s".format(end - start)
             # cv2.putText(
@@ -70,7 +70,7 @@ def get_classification(img, net, LABELS) :
 
 
 
-uploaded_file = st.file_uploader("Choose an image...", type="jpg")
+uploaded_file = st.file_uploader("Choose an image...", type=['png','jpeg','jpg'])
 
 if uploaded_file is not None:
     # Convert the file to an opencv image.
