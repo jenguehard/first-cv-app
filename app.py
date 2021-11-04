@@ -25,6 +25,9 @@ def get_classification(img, net, LABELS, conf_threshold) :
     elif W > 1000 and W < 2000:
         font_size = 2
         thickness = 2
+    elif W > 2000 and W < 3000:
+        font_size = 3
+        thickness = 3
     else :
         font_size = 5
         thickness = 5 
