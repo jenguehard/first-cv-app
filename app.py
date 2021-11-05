@@ -84,7 +84,7 @@ st.write("")
 
 conf_threshold = st.slider('Choose the confidence of the algorithm.', 0.0, 1.0, 0.5, 0.05)
 
-st.header('Choose your image :camera_flash:')
+st.header('Choose your image :camera:')
 
 
 uploaded_file = st.file_uploader("Choose an image...", type=['png','jpeg','jpg'])
