@@ -75,11 +75,11 @@ def get_classification(img, net, LABELS, conf_threshold) :
     return image
 
 #####
-st.title("Use Yolov4 to detect object on an image :picture:")
+st.title("Use Yolov4 to detect object on an image :eyeglasses:")
 
 st.write("Yolov4 is trained on COCO dataset and is able to detect 80 classes of elements (animals, objects...). Play with the confidence of the algorithm to check if you get the same predictions !")
 st.write("")
-st.write("If you choose a high value, you will get less predictions but more accurate. On the other hand, if you choose a low value, you will get more predictions that could be less accurate.")
+st.write("If you choose a high value, you will get less predictions but more accurate. On the other hand, if you choose a low value, you will get more predictions that could be less accurate. :chart_with_upwards_trend:")
 st.write("")
 
 conf_threshold = st.slider('Choose the confidence of the algorithm.', 0.0, 1.0, 0.5, 0.05)
