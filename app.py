@@ -75,7 +75,7 @@ def get_classification(img, net, LABELS, conf_threshold) :
     return image
 
 #####
-st.title("Use Yolov4 to detect object on an image")
+st.title("Use Yolov4 to detect object on an image :framed_picture:")
 
 st.write("Yolov4 is trained on COCO dataset and is able to detect 80 classes of elements (animals, objects...). Play with the confidence of the algorithm to check if you get the same predictions !")
 st.write("")
@@ -84,7 +84,7 @@ st.write("")
 
 conf_threshold = st.slider('Choose the confidence of the algorithm.', 0.0, 1.0, 0.5, 0.05)
 
-st.header('Choose your image')
+st.header('Choose your image :camera_flash:')
 
 
 uploaded_file = st.file_uploader("Choose an image...", type=['png','jpeg','jpg'])
