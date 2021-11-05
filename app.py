@@ -75,7 +75,7 @@ def get_classification(img, net, LABELS, conf_threshold) :
     return image
 
 #####
-st.title("Use Yolov4 to detect object on an image :framed_picture:")
+st.title("Use Yolov4 to detect object on an image :picture:")
 
 st.write("Yolov4 is trained on COCO dataset and is able to detect 80 classes of elements (animals, objects...). Play with the confidence of the algorithm to check if you get the same predictions !")
 st.write("")
